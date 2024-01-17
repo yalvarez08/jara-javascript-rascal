@@ -51,10 +51,11 @@ const products = [
 
 function start() {
 
-    console.log("start() Called")
+    console.log("start() Called");
     // Run the function to calculate product discounts
     calculateProductDiscounts(products);
 }
+
 
 // Takes in an array of products objects, calculates the
 // discount for each product, and renders the results to the DOM.
@@ -62,10 +63,13 @@ function calculateProductDiscounts(arrayOfProducts) {
     // Loop through the array of products
     for (let i = 0; i < arrayOfProducts.length; i++) {
         // "i" just can't find a single product...
-        const product = arrayOfProducts;
+        const product = arrayOfProducts[i];
+        console.log(product);
+    
 
         // Calculate the discount for this one product object
-        const discount = calculateDiscount(product);
+        let discount = calculateDiscount(product);
+    
 
         // Render the product and discount to the DOM
         renderProduct(product, discount);
@@ -76,7 +80,7 @@ function calculateProductDiscounts(arrayOfProducts) {
 // based on the average review, the year it was posted, and the price
 function calculateDiscount(product) {
     // Get a discount percentage, based on the product review
-    let reviewDiscount = getReviewDiscount(product); 
+    let reviewDiscount = getReviewDiscount(product.reviews); 
     
     // Get a discount percentage, based on the year the product was posted
     let yearAdjustment = getYearAdjustment(product.yearposted);
@@ -94,6 +98,7 @@ function calculateDiscount(product) {
         discountPercent = 0;
     }
 
+    let percent;
     // Convert the percentage to an actual dollar amount
     let discountAmount = product.price * percent;
 
@@ -105,7 +110,7 @@ function getReviewDiscount(product) {
     let discount;
 
     // 1, 2, or 3, you can't catch me!
-    if (product.reviews.avgRating = 5) {
+    if (product.reviews.avgRating == 5) {
         // perfect rating :trophy:, no discount
         discount = 0;
     }
